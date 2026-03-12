@@ -50,3 +50,10 @@ Birmingham, United Kingdom
 
 ## 🚧 Currently Building
 Advanced DevOps automation projects and scalable cloud platforms.
+---
+
+## 📊 GitHub Activity
+
+![Sri's GitHub stats](https://github-readme-stats.vercel.app/api?username=sri1650&show_icons=true&theme=github_dark)
+
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=sri1650&layout=compact&theme=github_dark)
