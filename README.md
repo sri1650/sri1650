@@ -1,16 +1,23 @@
-## Hi there 👋
+# Hi, I'm Sri 👋
 
-<!--
-**sri1650/sri1650** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+DevOps Engineer focused on cloud infrastructure, automation and scalable deployments.
 
-Here are some ideas to get you started:
+## Tech Stack
+AWS | Docker | Kubernetes | Terraform | GitHub Actions | Linux | Python
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## DevOps Skills
+- CI/CD Pipeline Automation
+- Infrastructure as Code
+- Containerization & Orchestration
+- Cloud Infrastructure
+- Monitoring & Observability
+
+## Current Focus
+Building DevOps projects and improving cloud automation skills.
+
+## Projects (Coming Soon)
+- Production CI/CD Pipeline
+- AWS Infrastructure with Terraform
+- Kubernetes Microservices Platform
+- DevOps Monitoring Stack
+- Infrastructure Automation Platform
