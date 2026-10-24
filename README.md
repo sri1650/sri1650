@@ -12,7 +12,7 @@ I build reliable software for autonomous robots and industrial automation — fr
 | Project | Engineering focus |
 |---|---|
 | [**ROS 2 Autonomous Warehouse Robot**](https://github.com/sri1650/ros2-autonomous-warehouse-robot) | ROS 2 Jazzy, C++/Python, Nav2, SLAM, sensor fusion, Gazebo, safety supervision, diagnostics |
-| [**ROS 2 Vision-Guided Manipulator**](https://github.com/sri1650/ros2-vision-guided-manipulator) | MoveIt 2, RGB-D perception, 3D pose estimation, collision-aware pick-and-place, ros2_control |
+| [**ROS 2 Vision-Guided Manipulator**](https://github.com/sri1650/ros2-vision-guided-manipulator) | MoveIt 2, RGB-D perception, 3D pose estimation, guarded arm-motion planning, ros2_control |
 
 ## Technical toolkit
 
