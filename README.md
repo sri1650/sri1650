@@ -32,11 +32,11 @@ Waypoint mission management, navigation interfaces, a LiDAR/IMU-ready robot mode
 3D target projection, manipulation task orchestration, guarded motion planning, and a **plan-only default**. Core software checks are automated; complete simulated pick-and-place execution and physical arm validation remain future integration work.
 
 ### [Industrial Servo Motion Control](https://github.com/sri1650/sri1650/tree/industrial-servo-motion-control)
-*Modern C++20 · Python · electromechanical modelling · embedded-style control · fault verification*
+*Modern C++20 · C firmware core · Python · model-based control · industrial-software verification*
 
-Portable cascaded position/velocity/current control, motion planning, synthetic motor identification, fault-latched control loops, fake hardware I/O, virtual CiA 402 states and a **localhost-only** Modbus/TCP test interface.
+A manufacturer-informed **virtual STM32/24 V encoder-gearmotor bench**, with a portable control core, rotary motion sequence, simulated PLC register contracts, synthetic parameter identification and deterministic fault handling. Includes an offline simulation dashboard and a freestanding Cortex-M4 **compile-only** firmware artifact.
 
-**Verified scope:** 71 Python tests, four native C++ test suites, 12/12 reproducibility stages and host sanitizers. Selected STM32/encoder gearmotor bench hardware is **not yet connected or validated**; all plant and stop-distance results are simulation-only. [Source, engineering evidence and hardware plan](https://github.com/sri1650/sri1650/tree/industrial-servo-motion-control).
+**Verified software scope:** 100 Python tests, four native C++ test suites, 16/16 local reproducibility stages, and successful GitHub Actions CI. The virtual study exercised 12 defined fault scenarios and 200 synthetic variation cases. **No physical motor, MCU, fieldbus or safety-rated stopping function has been validated.** [Source, simulated results and engineering limits](https://github.com/sri1650/sri1650/tree/industrial-servo-motion-control).
 
 ## Technical focus
 
