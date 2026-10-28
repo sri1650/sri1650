@@ -27,3 +27,18 @@ Stop at this verified pre-Work boundary. Next meaningful work: selected MCU/driv
 - Hypothetical fixed-priority scheduling: 7.05% utilisation under **assumed WCET inputs**; no actual MCU deadline proof.
 - Native host benchmark 60,000 cycles recorded compute-time percentiles; development-host timing is not an embedded WCET guarantee.
 - Read `docs/NEXT_WORK_BOUNDARY.md` before spending Work/Codex credits. Physical motor/driver/MCU integration and commissioning remain unresolved.
+
+## Final vendor-informed virtual commissioning release — 28 October 2026
+
+The earlier sections document the original linear-axis SIL checkpoint; this section supersedes their project status. A **new independent rotary reference bench** now uses published ST NUCLEO-G474RE / Pololu #4693 / Pololu #2992 specifications plus separately labelled assumed/inferred parameters. No real parts were bought, energised or measured.
+
+- Portable C firmware core compiled for host execution and ARM Cortex-M4 compile-only target. No board HAL peripherals, ADC/PWM/GPIO interrupts, or physical code execution is implied.
+- 3,200-count virtual output encoder, averaged virtual motor/gearbox/load, simulated H-bridge, synthetic voltage/current/temperature/drive fault and independent-interlock *logic input*.
+- A virtual rotary PLC register image and Modbus PDU packet tests; nominal sequence requests 90°, dwells, then returns to 0°. No real PLC, industrial network or certified safety protocol.
+- Fault latch and output inhibition tested on host. Additional travel after disabling in the virtual model does not represent a safe physical stop.
+- Fixed-seed ±30% *invented* inertia/friction sensitivity campaign, not equipment reliability statistics.
+- Offline replay dashboard, 3 generated plots and machine-readable release results.
+- Full project verification includes the original 71 Python tests and 4 C++ suites plus new firmware/PLC regression tests, native C sanitizer build and the virtual release gate.
+- Evidence: `outputs/virtual_bench/VIRTUAL_ENGINEERING_RELEASE.md`; acceptance contract: `docs/VIRTUAL_RELEASE_SCOPE.md`.
+
+**Done for virtual-only portfolio scope; not physically validated, not production/servo safety certified.**

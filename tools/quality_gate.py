@@ -41,6 +41,10 @@ def main():
       ("offline_dashboard",[sys.executable,"tools/generate_dashboard.py"],30,None),
       ("host_loop_benchmark",[str(build/"servo_host_cycle_benchmark")],30,ROOT/"outputs/host_loop_benchmark.json"),
       ("extended_hardware_neutral_evidence",[sys.executable,"tools/extended_prework.py","--host-benchmark",str(build/"servo_host_cycle_benchmark")],100,None),
+      ("virtual_firmware_host_and_arm",[sys.executable,"tools/build_virtual_firmware.py"],45,None),
+      ("virtual_core_native_and_sanitizers",["bash","tools/verify_virtual_core_native.sh"],45,None),
+      ("vendor_informed_virtual_bench",[sys.executable,"tools/build_virtual_bench_evidence.py","--samples","200","--seed","2026"],100,None),
+      ("virtual_release_contract",[sys.executable,"tools/verify_virtual_release.py"],15,None),
     ]
     for name,cmd,timeout,out in steps:
         result=run(name,cmd,timeout,out)
@@ -50,7 +54,7 @@ def main():
     for x in results:
         x["stdout_tail"]=x["stdout_tail"].replace(str(ROOT),"<PROJECT_ROOT>")
         x["stderr_tail"]=x["stderr_tail"].replace(str(ROOT),"<PROJECT_ROOT>")
-    report={"validation_scope":"Python/C++ SIL, virtual fieldbus, synthetic identification and host timing only — no physical/RTOS/hardware validation",
+    report={"validation_scope":"Python/C++ and C-core host SIL, vendor-informed virtual bench, software PLC and synthetic identification — no physical/RTOS/hardware validation",
             "status":"PASS" if len(results)==len(steps) and all(x["status"]=="pass" for x in results) else "FAIL",
             "checks":results}
     args.output.parent.mkdir(parents=True,exist_ok=True)

@@ -8,6 +8,27 @@ It follows the **Intelligent CAD & CAE Automation** project: the original mechan
 
 **Reference hardware selected (not yet built):** ST NUCLEO-G474RE + Pololu #4693 24 V brushed encoder gearmotor + Pololu #2992 PWM H-bridge for an isolated, current-limited benchtop prototype. See [`docs/SELECTED_BENCH_HARDWARE.md`](docs/SELECTED_BENCH_HARDWARE.md). **This reference hardware does not validate or match the hypothetical 8 kg linear-axis plant without redesign and measurement.**
 
+## Software-only final virtual release — 28 October 2026
+
+**Complete for the defined vendor-informed digital-twin scope. Not a hardware-tested servo drive.** The original hypothetical 8 kg linear-axis SIL is retained unchanged. A **separate rotary bench** now uses published specification values for the STM32G474RE, Pololu #4693 encoder gearmotor and #2992 H-bridge, with all unknown electrical/mechanical parameters marked **derived or assumed**.
+
+The new bench executes the **same C firmware control core** both as a host shared library against a Python virtual motor and as freestanding Cortex-M4 compile-only code. It includes a virtual PLC command register contract, replay/acknowledgement protection, a simulated 90°→dwell→0° sequence, 12 fault classes, seeded assumption variations and a standalone offline engineering dashboard. It is not a physical HIL setup; the ARM ELF does not implement vendor ADC/PWM/encoder peripherals or qualify as flash-ready STM32 firmware.
+
+- [Virtual engineering release and exact limitations](outputs/virtual_bench/VIRTUAL_ENGINEERING_RELEASE.md)
+- [Offline interactive operator dashboard](outputs/virtual_bench/virtual_commissioning_dashboard.html)
+- [Manufacturer data versus explicit assumptions](config/published_reference_bench.json)
+- [Virtual interface and safety review](docs/VIRTUAL_INTERFACE_AND_WIRING_REVIEW.md)
+- [Definition of software-only completion](docs/VIRTUAL_RELEASE_SCOPE.md)
+
+```bash
+python -m pip install -e '.[test]'
+python tools/quality_gate.py   # original core tests + virtual release + generated evidence
+```
+
+A preinstalled ARM-capable LLVM/LLD toolchain additionally builds a Cortex-M4 ELF; on macOS without this cross-toolchain, host simulation still works and the ARM build omission is recorded. See `tools/build_virtual_firmware.py`.
+
+![Virtual 90° rotary control and return](outputs/virtual_bench/rotary_motion.png)
+
 ## Implemented
 
 - A rigid-belt electromechanical plant with RL winding, back-EMF, equivalent rotating inertia, viscous drag and smooth Coulomb friction; RK4 time stepping.

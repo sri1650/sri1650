@@ -25,3 +25,15 @@ jobs:
 
       - name: Run host C++ memory/undefined-behaviour sanitizers
         run: tools/verify_sanitizers.sh
+
+      - name: Archive vendor-informed virtual engineering evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: industrial-servo-virtual-release
+          path: |
+            outputs/virtual_bench/VIRTUAL_ENGINEERING_RELEASE.md
+            outputs/virtual_bench/release_results.json
+            outputs/virtual_bench/*.png
+            outputs/virtual_bench/assumption_variation.csv
+            outputs/virtual_bench/virtual_commissioning_dashboard.html
+          retention-days: 30

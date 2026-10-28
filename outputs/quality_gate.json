@@ -1,20 +1,20 @@
 {
-  "validation_scope": "Python/C++ SIL, virtual fieldbus, synthetic identification and host timing only \u2014 no physical/RTOS/hardware validation",
+  "validation_scope": "Python/C++ and C-core host SIL, vendor-informed virtual bench, software PLC and synthetic identification \u2014 no physical/RTOS/hardware validation",
   "status": "PASS",
   "checks": [
     {
       "name": "python_tests",
       "status": "pass",
       "returncode": 0,
-      "duration_s": 5.528,
-      "stdout_tail": ".......................................................................  [100%]\n",
+      "duration_s": 7.005,
+      "stdout_tail": "........................................................................ [ 72%]\n............................                                             [100%]\n",
       "stderr_tail": ""
     },
     {
       "name": "python_compile",
       "status": "pass",
       "returncode": 0,
-      "duration_s": 0.895,
+      "duration_s": 1.305,
       "stdout_tail": "",
       "stderr_tail": ""
     },
@@ -22,7 +22,7 @@
       "name": "generate_cpp_config",
       "status": "pass",
       "returncode": 0,
-      "duration_s": 1.069,
+      "duration_s": 1.589,
       "stdout_tail": "<PROJECT_ROOT>/cpp/include/servo/generated_assumptions.hpp\n",
       "stderr_tail": ""
     },
@@ -30,7 +30,7 @@
       "name": "cmake_configure",
       "status": "pass",
       "returncode": 0,
-      "duration_s": 0.06,
+      "duration_s": 0.061,
       "stdout_tail": "-- Configuring done (0.0s)\n-- Generating done (0.0s)\n-- Build files have been written to: <PROJECT_ROOT>/build/cpp\n",
       "stderr_tail": ""
     },
@@ -38,23 +38,23 @@
       "name": "cmake_build",
       "status": "pass",
       "returncode": 0,
-      "duration_s": 2.907,
-      "stdout_tail": "[ 36%] Built target servo_core\n[ 42%] Building CXX object CMakeFiles/servo_demo.dir/src/demo.cpp.o\n[ 47%] Building CXX object CMakeFiles/servo_core_test.dir/tests/test_core.cpp.o\n[ 52%] Building CXX object CMakeFiles/servo_embedded_contract_test.dir/tests/test_runtime.cpp.o\n[ 63%] Built target servo_virtual_bus_test\n[ 68%] Building CXX object CMakeFiles/servo_host_cycle_benchmark.dir/src/host_cycle_benchmark.cpp.o\n[ 73%] Linking CXX executable servo_embedded_contract_test\n[ 78%] Linking CXX executable servo_core_test\n[ 78%] Built target servo_embedded_contract_test\n[ 78%] Built target servo_core_test\n[ 84%] Building CXX object CMakeFiles/servo_hal_test.dir/tests/test_hal.cpp.o\n[ 89%] Linking CXX executable servo_hal_test\n[ 89%] Built target servo_hal_test\n[ 94%] Linking CXX executable servo_demo\n[ 94%] Built target servo_demo\n[100%] Linking CXX executable servo_host_cycle_benchmark\n[100%] Built target servo_host_cycle_benchmark\n",
+      "duration_s": 2.59,
+      "stdout_tail": "[ 36%] Built target servo_core\n[ 47%] Built target servo_virtual_bus_test\n[ 52%] Building CXX object CMakeFiles/servo_demo.dir/src/demo.cpp.o\n[ 57%] Building CXX object CMakeFiles/servo_embedded_contract_test.dir/tests/test_runtime.cpp.o\n[ 63%] Building CXX object CMakeFiles/servo_core_test.dir/tests/test_core.cpp.o\n[ 68%] Building CXX object CMakeFiles/servo_host_cycle_benchmark.dir/src/host_cycle_benchmark.cpp.o\n[ 73%] Linking CXX executable servo_embedded_contract_test\n[ 78%] Linking CXX executable servo_core_test\n[ 78%] Built target servo_embedded_contract_test\n[ 78%] Built target servo_core_test\n[ 84%] Building CXX object CMakeFiles/servo_hal_test.dir/tests/test_hal.cpp.o\n[ 89%] Linking CXX executable servo_hal_test\n[ 89%] Built target servo_hal_test\n[ 94%] Linking CXX executable servo_demo\n[ 94%] Built target servo_demo\n[100%] Linking CXX executable servo_host_cycle_benchmark\n[100%] Built target servo_host_cycle_benchmark\n",
       "stderr_tail": ""
     },
     {
       "name": "cpp_ctest",
       "status": "pass",
       "returncode": 0,
-      "duration_s": 0.033,
-      "stdout_tail": "Internal ctest changing into directory: <PROJECT_ROOT>/build/cpp\nTest project <PROJECT_ROOT>/build/cpp\n    Start 1: servo_core_test\n1/4 Test #1: servo_core_test ..................   Passed    0.00 sec\n    Start 2: servo_virtual_bus_test\n2/4 Test #2: servo_virtual_bus_test ...........   Passed    0.01 sec\n    Start 3: servo_embedded_contract_test\n3/4 Test #3: servo_embedded_contract_test .....   Passed    0.00 sec\n    Start 4: servo_hal_test\n4/4 Test #4: servo_hal_test ...................   Passed    0.00 sec\n\n100% tests passed, 0 tests failed out of 4\n\nTotal Test time (real) =   0.02 sec\n",
+      "duration_s": 0.056,
+      "stdout_tail": "Internal ctest changing into directory: <PROJECT_ROOT>/build/cpp\nTest project <PROJECT_ROOT>/build/cpp\n    Start 1: servo_core_test\n1/4 Test #1: servo_core_test ..................   Passed    0.01 sec\n    Start 2: servo_virtual_bus_test\n2/4 Test #2: servo_virtual_bus_test ...........   Passed    0.01 sec\n    Start 3: servo_embedded_contract_test\n3/4 Test #3: servo_embedded_contract_test .....   Passed    0.01 sec\n    Start 4: servo_hal_test\n4/4 Test #4: servo_hal_test ...................   Passed    0.01 sec\n\n100% tests passed, 0 tests failed out of 4\n\nTotal Test time (real) =   0.03 sec\n",
       "stderr_tail": ""
     },
     {
       "name": "cpp_sil_demo",
       "status": "pass",
       "returncode": 0,
-      "duration_s": 0.004,
+      "duration_s": 0.01,
       "stdout_tail": "saved to <PROJECT_ROOT>/outputs/cpp_sil_trace.csv",
       "stderr_tail": ""
     },
@@ -62,7 +62,7 @@
       "name": "python_evidence",
       "status": "pass",
       "returncode": 0,
-      "duration_s": 8.461,
+      "duration_s": 11.21,
       "stdout_tail": "Built 100 deterministic variants, 8 fault/nominal scenarios\nFinal error=0.0011 mm, max tracking=0.312 mm\nOutput: <PROJECT_ROOT>/outputs\n",
       "stderr_tail": ""
     },
@@ -70,7 +70,7 @@
       "name": "cross_language_parity",
       "status": "pass",
       "returncode": 0,
-      "duration_s": 1.235,
+      "duration_s": 1.229,
       "stdout_tail": "{\n  \"cpp_samples\": 251,\n  \"python_samples\": 2501,\n  \"final_position_difference_mm\": 0.0005030550592477478,\n  \"maximum_abs_position_difference_mm\": 0.023740424955731587,\n  \"mean_abs_position_difference_mm\": 0.005714078692930749,\n  \"final_cpp_error_mm\": 0.0005644853000030814,\n  \"pass\": true,\n  \"interpretation\": \"C++ fixed-step control/plant checked against Python counterpart; numerical integrators differ; neither is physical validation.\"\n}\n",
       "stderr_tail": ""
     },
@@ -78,7 +78,7 @@
       "name": "offline_dashboard",
       "status": "pass",
       "returncode": 0,
-      "duration_s": 1.409,
+      "duration_s": 1.705,
       "stdout_tail": "<PROJECT_ROOT>/outputs/servo_control_dashboard.html\n",
       "stderr_tail": ""
     },
@@ -94,8 +94,40 @@
       "name": "extended_hardware_neutral_evidence",
       "status": "pass",
       "returncode": 0,
-      "duration_s": 6.094,
+      "duration_s": 6.615,
       "stdout_tail": "{\n  \"status\": \"PASS\",\n  \"fault_cases\": 64,\n  \"resistance_ohm\": 1.4992151816716155,\n  \"inductance_h\": 0.0030128251220098968,\n  \"holdout_rmse_a\": 0.021086536610521983,\n  \"target\": \"<PROJECT_ROOT>/outputs/extended_prework\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "virtual_firmware_host_and_arm",
+      "status": "pass",
+      "returncode": 0,
+      "duration_s": 1.666,
+      "stdout_tail": "{\n  \"host_shared_library\": \"build/virtual_firmware/libbench_core.so\",\n  \"arm_compile_only\": true,\n  \"target\": \"Cortex-M4 ARM EABI\",\n  \"arm_elf\": \"build/virtual_firmware/bench_m4_compile_only.elf\",\n  \"arm_elf_bytes\": 132592\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "virtual_core_native_and_sanitizers",
+      "status": "pass",
+      "returncode": 0,
+      "duration_s": 1.016,
+      "stdout_tail": "PASS: C firmware native and AddressSanitizer/UndefinedBehaviorSanitizer\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "vendor_informed_virtual_bench",
+      "status": "pass",
+      "returncode": 0,
+      "duration_s": 15.456,
+      "stdout_tail": "{\n  \"status\": \"PASS\",\n  \"faults\": 12,\n  \"nominal_final_deg\": -0.16857925019660464,\n  \"screen_passes\": 200,\n  \"samples\": 200,\n  \"dashboard\": \"outputs/virtual_bench/virtual_commissioning_dashboard.html\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "virtual_release_contract",
+      "status": "pass",
+      "returncode": 0,
+      "duration_s": 1.349,
+      "stdout_tail": "PASS: virtual release evidence consistent, source-linked, physically unvalidated\n",
       "stderr_tail": ""
     }
   ]

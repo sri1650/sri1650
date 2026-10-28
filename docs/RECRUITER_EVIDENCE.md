@@ -25,3 +25,13 @@
 6. Why was the original parameter sweep invalid when external disturbances pushed the axis into its hard home stop?
 7. Why is an independent encoder/tachometer needed to diagnose encoder freezes reliably?
 8. What tests and hardware would be needed to call this a real-time and safety-validated system?
+
+## Additional recruiter-facing evidence: vendor-informed virtual STM32 motor bench
+
+- Simulated a Pololu 24 V brushed encoder gearmotor based on published output speed, current, gearing and 3,200-count quadrature feedback; documented the source, inferred motor R/K_e and assumed L/J/friction.
+- Implemented a portable C multirate position/velocity/current control core used in host-simulated closed loop, with Cortex-M4 cross-compile evidence. **Not a real STM32 firmware bring-up.**
+- Implemented virtual rotary PLC register and Modbus PDU command sequencing, a 90°/return cycle and automated fault-latching tests.
+- Generated repeatable scenario metrics, CSV/JSON, engineering plots and interactive offline dashboard; completed 200 hypothetical inertia/friction variation runs.
+- Preserved original C++20/Python SIL project, C++/Python parity evidence and CI. **No physical motor, current-protection circuit, networked PLC or safety-certified stop has been tested.**
+
+Suggested CV wording: **"Developed a vendor-specification-informed motor-control digital twin with a portable C control core cross-compiled for Cortex-M4, simulated rotary PLC/Modbus interfaces, deterministic fault injection and reproducible engineering verification; clearly separated manufacturer data, inferred parameters and synthetic assumptions."**

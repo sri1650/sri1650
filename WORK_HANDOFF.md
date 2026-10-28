@@ -40,3 +40,7 @@ Repo link/commit; C++ and Python test counts; actual target/emulator identified;
 The low-credit work scope has been reduced again: a native C++ hardware-neutral loop and HAL, virtual CiA402 drive states, local Modbus/TCP test transport, synthetic parameter identification, fixed-priority scheduling analysis and expanded SIL fault campaigns are now implemented. **Read `docs/NEXT_WORK_BOUNDARY.md` first.**
 
 Run `python tools/quality_gate.py` to verify the new baseline. Do not recreate anything listed as completed there. With no selected MCU/motor/driver and no physical bench, the correct next step is to request only required datasheets and hardware access before attempting a real embedded driver; never claim target real-time timing or motor safety from software-only tests.
+
+## Virtual-only release complete; avoid unnecessary Codex continuation (28 October 2026)
+
+The user explicitly chose **not to buy hardware** and requested completion entirely through official component data and assumptions. This scope is now implemented and tested. There is no need to start another Codex session to rewrite the simulator or create a hypothetical hardware commissioning claim. Only if the user later opts for real hardware should firmware-specific STM32 clock/peripheral/HAL support, actual fieldbus and electrical protection be undertaken, under a competent review and with measured device data. See `docs/VIRTUAL_RELEASE_SCOPE.md` and `outputs/virtual_bench/VIRTUAL_ENGINEERING_RELEASE.md`.
