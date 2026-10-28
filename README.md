@@ -31,6 +31,13 @@ Waypoint mission management, navigation interfaces, a LiDAR/IMU-ready robot mode
 
 3D target projection, manipulation task orchestration, guarded motion planning, and a **plan-only default**. Core software checks are automated; complete simulated pick-and-place execution and physical arm validation remain future integration work.
 
+### [Industrial Servo Motion Control](https://github.com/sri1650/sri1650/tree/industrial-servo-motion-control)
+*Modern C++20 · Python · electromechanical modelling · embedded-style control · fault verification*
+
+Portable cascaded position/velocity/current control, motion planning, synthetic motor identification, fault-latched control loops, fake hardware I/O, virtual CiA 402 states and a **localhost-only** Modbus/TCP test interface.
+
+**Verified scope:** 71 Python tests, four native C++ test suites, 12/12 reproducibility stages and host sanitizers. Selected STM32/encoder gearmotor bench hardware is **not yet connected or validated**; all plant and stop-distance results are simulation-only. [Source, engineering evidence and hardware plan](https://github.com/sri1650/sri1650/tree/industrial-servo-motion-control).
+
 ## Technical focus
 
 **Robotics and autonomy:** ROS 2, Nav2, MoveIt 2, Gazebo, PX4 SITL, robot navigation, geometric vision, sensor integration, state estimation, and motion planning.  
