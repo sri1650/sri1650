@@ -1,0 +1,49 @@
+{
+  "status": "ASSUMED CONCEPT VALUES - NOT AN APPROVED MOTOR OR MACHINE DESIGN",
+  "units": "mm, N, N-m, kg, s unless explicitly labelled",
+  "material": "aluminium_6061_t6_assumed",
+  "bracket": {
+    "width_mm": 96.0,
+    "base_depth_mm": 84.0,
+    "wall_height_mm": 88.0,
+    "plate_thickness_mm": 12.0,
+    "pilot_diameter_mm": 38.5,
+    "motor_hole_spacing_mm": 47.14,
+    "motor_hole_diameter_mm": 5.8,
+    "base_slot_length_mm": 16.0,
+    "base_slot_width_mm": 9.0,
+    "base_slot_x_centres_mm": [-30.0, 30.0],
+    "base_slot_y_centres_mm": [-24.0, 10.0],
+    "gusset_thickness_mm": 6.0,
+    "gusset_reach_mm": 32.0,
+    "gusset_height_mm": 44.0,
+    "gusset_edge_margin_mm": 7.0
+  },
+  "material_properties": {
+    "elastic_modulus_gpa": 68.9,
+    "poisson_ratio": 0.33,
+    "density_kg_m3": 2700.0,
+    "nominal_yield_mpa": 240.0,
+    "notes": "Illustrative 6061-T6 values for educational study; verify exact product form, temper, thickness and manufacturer before design acceptance."
+  },
+  "load_cases": [
+    {"id": "NOMINAL", "flange_normal_force_n": 90.0, "motor_reaction_torque_nm": 1.0},
+    {"id": "OVERLOAD_SCREEN", "flange_normal_force_n": 180.0, "motor_reaction_torque_nm": 2.0}
+  ],
+  "screening_limits": {
+    "min_surrogate_yield_ratio": 2.0,
+    "max_surrogate_tip_deflection_mm": 0.14,
+    "min_bolt_hole_edge_clearance_mm": 7.0,
+    "min_pilot_edge_clearance_mm": 9.0
+  },
+  "motion_axis": {
+    "moving_mass_kg": 8.0,
+    "horizontal_acceleration_m_s2": 1.0,
+    "friction_coefficient": 0.12,
+    "pulley_radius_mm": 20.0,
+    "transmission_efficiency": 0.85,
+    "target_speed_m_s": 0.35,
+    "torque_design_factor": 2.5,
+    "candidate_motor_continuous_torque_nm": 1.2
+  }
+}

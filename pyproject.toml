@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "industrial-servo-motion-control"
+version = "0.1.0"
+description = "Evidence-driven motor-axis digital twin and C++20 control core"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.23", "matplotlib>=3.5"]
+
+[project.optional-dependencies]
+test = ["pytest>=7", "scipy>=1.10"]
+analysis = ["scipy>=1.10"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"

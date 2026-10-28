@@ -1,0 +1,42 @@
+cmake_minimum_required(VERSION 3.16)
+project(industrial_servo_motion_control LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_library(servo_core STATIC src/control.cpp src/supervisor.cpp src/virtual_bus.cpp src/runtime.cpp src/drive402.cpp src/hal.cpp)
+target_include_directories(servo_core PUBLIC include)
+if(MSVC)
+  target_compile_options(servo_core PRIVATE /W4)
+else()
+  target_compile_options(servo_core PRIVATE -Wall -Wextra -Wpedantic -Werror)
+endif()
+enable_testing()
+add_executable(servo_core_test tests/test_core.cpp)
+target_link_libraries(servo_core_test PRIVATE servo_core)
+add_test(NAME servo_core_test COMMAND servo_core_test)
+add_executable(servo_demo src/demo.cpp)
+target_link_libraries(servo_demo PRIVATE servo_core)
+
+add_executable(servo_virtual_bus_test tests/test_virtual_bus.cpp)
+target_link_libraries(servo_virtual_bus_test PRIVATE servo_core)
+add_test(NAME servo_virtual_bus_test COMMAND servo_virtual_bus_test)
+
+add_executable(servo_embedded_contract_test tests/test_runtime.cpp)
+target_link_libraries(servo_embedded_contract_test PRIVATE servo_core)
+add_test(NAME servo_embedded_contract_test COMMAND servo_embedded_contract_test)
+
+add_executable(servo_host_cycle_benchmark src/host_cycle_benchmark.cpp)
+target_link_libraries(servo_host_cycle_benchmark PRIVATE servo_core)
+
+add_executable(servo_hal_test tests/test_hal.cpp)
+target_link_libraries(servo_hal_test PRIVATE servo_core)
+add_test(NAME servo_hal_test COMMAND servo_hal_test)
+
+# Optional host-only compiler sanitizer checks; no embedded target is implied.
+option(SERVO_ENABLE_SANITIZERS "Enable AddressSanitizer and UBSan on compatible hosts" OFF)
+if(SERVO_ENABLE_SANITIZERS AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+  foreach(target servo_core servo_demo servo_core_test servo_virtual_bus_test
+                 servo_embedded_contract_test servo_hal_test servo_host_cycle_benchmark)
+    target_compile_options(${target} PRIVATE -fsanitize=address,undefined -fno-omit-frame-pointer)
+    target_link_options(${target} PRIVATE -fsanitize=address,undefined)
+  endforeach()
+endif()

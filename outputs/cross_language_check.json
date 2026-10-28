@@ -1,0 +1,10 @@
+{
+  "cpp_samples": 251,
+  "python_samples": 2501,
+  "final_position_difference_mm": 0.0005030550592477478,
+  "maximum_abs_position_difference_mm": 0.023740424955731587,
+  "mean_abs_position_difference_mm": 0.005714078692930749,
+  "final_cpp_error_mm": 0.0005644853000030814,
+  "pass": true,
+  "interpretation": "C++ fixed-step control/plant checked against Python counterpart; numerical integrators differ; neither is physical validation."
+}

@@ -1,44 +1,121 @@
-# Sri Charan Kumba
+# Industrial Servo Motion Control — Digital Twin & C++ Control Runtime
 
-**Robotics & Mechatronics Software Engineer**  
-Birmingham, United Kingdom · MSc in Mechatronics & Intelligent Machines
+> **Status:** tested engineering-software portfolio prototype. **No motor or drive hardware has been tested.** The electrical and mechanical model is explicitly assumed. This repository does not claim industrial real-time guarantees, certified safety, or a commissioned axis.
 
-I develop and validate software for autonomous robots and industrial automation. My engineering projects span **robot navigation, vision-guided manipulation, visual–inertial state estimation, and multi-robot factory orchestration**. I focus on clear software interfaces, predictable failure handling, and evidence from automated tests and reproducible simulation.
+A reproducible software-in-the-loop (SIL) project combining **modern C++20**, **Python**, electromechanical modelling, cascaded motor control, smooth motion planning, encoder quantisation, command-state supervision, deterministic fault injection and quantitative verification.
 
-## Featured projects
+It follows the **Intelligent CAD & CAE Automation** project: the original mechanical-axis assumptions (8 kg moving mass, 20 mm pulley radius, 0.85 efficiency and 0.35 m/s target speed) are preserved in `assets/cad_axis_reference.json`. The 3:1 gearing and all detailed motor/electrical data are *new illustrative assumptions*, not derived from an actual motor datasheet.
 
-### [Autonomous Microfactory OS](https://github.com/sri1650/autonomous-microfactory-os)
-*Multi-robot orchestration · Python · Rust · gRPC · OR-Tools*
+**Reference hardware selected (not yet built):** ST NUCLEO-G474RE + Pololu #4693 24 V brushed encoder gearmotor + Pololu #2992 PWM H-bridge for an isolated, current-limited benchtop prototype. See [`docs/SELECTED_BENCH_HARDWARE.md`](docs/SELECTED_BENCH_HARDWARE.md). **This reference hardware does not validate or match the hypothetical 8 kg linear-axis plant without redesign and measurement.**
 
-A simulated factory software platform combining constrained job scheduling, conflict-aware robot routing, Rust command runtimes, PostgreSQL persistence, distributed tracing, ClickHouse telemetry, and deterministic event replay.
+## Implemented
 
-**Verified scope:** 153 Python and 11 Rust tests; three-job end-to-end integration and failure/recovery scenarios using local services and simulation. [Architecture, benchmarks and reproduction steps](https://github.com/sri1650/autonomous-microfactory-os#readme).
+- A rigid-belt electromechanical plant with RL winding, back-EMF, equivalent rotating inertia, viscous drag and smooth Coulomb friction; RK4 time stepping.
+- Rest-to-rest fifth-order trajectories with analytic velocity, acceleration and jerk constraints.
+- Cascaded **100 Hz position P / 250 Hz speed PI / 1 kHz current PI** control with voltage/current saturation and conditional anti-windup.
+- A standalone C++20 controller compiled without ROS, PLC SDKs or vendor dependencies; generated configuration from the same Python-readable JSON.
+- A virtual encoder, homing-state *supervisor prototype*, heartbeat/watchdog and latched simulated fault inputs.
+- A Python virtual protocol with CRC32 and duplicate-command rejection, and a separate compact C++ fixed-size 12-byte test protocol with CRC16. **Neither is a real CANopen implementation.**
+- Reproducible nominal, 6 N disturbance and six fault scenarios, plus a 100-sample synthetic parameter-variation study.
+- A C++ SIL runner, full-rate Python traces, cross-language numerical comparison, static plots and a self-contained interactive HTML dashboard.
+- A single verification script covering Python tests, C++ build/CTest, simulations and numerical consistency.
 
-### [Visual-Inertial UAV Navigation](https://github.com/sri1650/visual-inertial-uav-navigation)
-*State estimation · Modern C++ · OpenCV · PX4 · Gazebo*
+## Evidence at the pre-Codex checkpoint
 
-A GPS-denied navigation software project with a 15-state error-state EKF, calibrated camera/IMU interfaces, geometric vision, estimator health/recovery logic, and a MAVLink external-vision adapter.
+See [`outputs/ENGINEERING_EVIDENCE.md`](outputs/ENGINEERING_EVIDENCE.md) and machine-readable [`outputs/evidence_summary.json`](outputs/evidence_summary.json).
 
-**Verified scope:** 57 Python and 9 C++ tests; PX4/Gazebo SITL completed 5/5 waypoints and demonstrated estimator-loss failsafe behaviour. The SITL mission used **Gazebo ground truth as external-vision input**; camera-derived VIO trajectory accuracy is not yet measured. [Methods and evidence](https://github.com/sri1650/visual-inertial-uav-navigation#readme).
+| Result | Simulation evidence |
+|---|---:|
+| Intended travel | 100 mm |
+| Nominal final position error | ~0.0011 mm |
+| Nominal peak tracking error | ~0.312 mm |
+| Nominal peak current | ~0.917 A |
+| 6 N disturbance peak tracking error | ~0.457 mm |
+| C++/Python max trajectory discrepancy | ~0.024 mm |
+| 100-seed assumed parameter screen | 100/100 pass |
+| Example simulated additional travel after mid-move drive disable | ~19 mm |
 
-### [ROS 2 Autonomous Warehouse Robot](https://github.com/sri1650/ros2-autonomous-warehouse-robot)
-*ROS 2 Jazzy · Nav2 · C++/Python*
+**These are numbers from an idealised offline plant, not achievable real-world performance guarantees.** The parameter screen uses invented independent uniform ranges and does not estimate physical-system reliability. The fault-stop comparison uses an assumed high-impedance drive disable with simplified friction; it is **not a certified emergency stop or validated coast distance**.
 
-Waypoint mission management, navigation interfaces, a LiDAR/IMU-ready robot model, command/sensor supervision, and diagnostics. Application/build tests are in place; full Gazebo/Nav2 end-to-end validation remains a next step.
+## View the evidence
 
-### [ROS 2 Vision-Guided Manipulator](https://github.com/sri1650/ros2-vision-guided-manipulator)
-*ROS 2 Jazzy · MoveIt 2 · RGB-D perception*
+Open [`outputs/servo_control_dashboard.html`](outputs/servo_control_dashboard.html) in a browser. It works offline and lets you inspect the simulated run frame by frame.
 
-3D target projection, manipulation task orchestration, guarded motion planning, and a **plan-only default**. Core software checks are automated; complete simulated pick-and-place execution and physical arm validation remain future integration work.
+![Axis position](outputs/plots/tracking_position.png)
 
-## Technical focus
+## Run locally
 
-**Robotics and autonomy:** ROS 2, Nav2, MoveIt 2, Gazebo, PX4 SITL, robot navigation, geometric vision, sensor integration, state estimation, and motion planning.  
-**Software engineering:** C++, Python, Rust, Linux, Protobuf/gRPC, Docker, Git, CI, and automated unit/integration testing.  
-**Robotics systems:** Multi-agent path planning, constraint-based scheduling, OpenCV, PostgreSQL, OpenTelemetry, ClickHouse, fault injection, diagnostics, and deterministic replay.
+Requirements: Python 3.10+, `numpy`, `matplotlib`, `pytest`; CMake 3.16+ and a C++20 compiler for the native core.
 
-## Engineering approach
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e '.[test]'
+python tools/quality_gate.py
+```
 
-I prefer **measured behaviour over unverified claims**: explicit state and interface contracts, reproducible test scenarios, traceable failures, and clear separation between unit-tested software, simulated integration, and physical hardware validation.
+Run only the Python evidence builder:
 
-**Career interests:** Robotics Software Engineering · Mechatronics/Controls Software · Industrial Automation · Autonomy & Perception — UK.
+```bash
+PYTHONPATH=src python tools/build_evidence.py --samples 100 --seed 2026
+PYTHONPATH=src python tools/generate_dashboard.py
+```
+
+Native C++:
+
+```bash
+python tools/generate_cpp_config.py
+cmake -S cpp -B build/cpp -DCMAKE_BUILD_TYPE=Release
+cmake --build build/cpp --parallel
+ctest --test-dir build/cpp --output-on-failure
+./build/cpp/servo_demo > outputs/cpp_sil_trace.csv
+```
+
+## Repository layout
+
+| Folder | Purpose |
+|---|---|
+| `config/` | Explicit assumptions, engineering units and controller rates |
+| `assets/` | Exact Mechanical CAD project axis reference |
+| `src/servo_lab/` | Motor plant, planner, controllers, software supervisor and SIL campaign |
+| `cpp/include/servo/` and `cpp/src/` | Portable no-dynamic-allocation control loop and virtual command protocol |
+| `tests/` and `cpp/tests/` | Deterministic verification |
+| `tools/` | C++ configuration generation, quality gate, evidence and dashboard |
+| `outputs/` | Reported traces, figures, measurements and offline UI |
+| `docs/` | Engineering assumptions, architecture, validation boundaries and handoff |
+
+
+## Extended hardware-neutral pre-Work implementation (28 October 2026)
+
+The software-only integration boundary has been extended **without vendor-specific firmware or physical hardware claims**:
+
+- `cpp/include/servo/runtime.hpp` — portable C++ deterministic loop with default-off, timing-gap latch, NaN checks, real sensor/clock timestamps and fault reset/re-arm tests.
+- `cpp/include/servo/hal.hpp` — callback-based I/O adapter and fake drive, with observed independent-interlock gating. This is **not** safety-rated motor protection.
+- `cpp/include/servo/drive402.hpp` — simulated drive-state semantics inspired by CiA 402. **No actual CANopen/EtherCAT**.
+- `src/servo_lab/plc_contract.py`, `modbus_tcp.py` — typed zero-based PLC registers and **localhost-only Modbus/TCP** test interface (function codes 03/04/06/16). No industrial-network or real-actuator security guarantees.
+- `src/servo_lab/identification.py` — synthetic electrical RL and mechanical inertia/friction identification with holdout tests and excitation rejection; **not measured motor parameters**.
+- `src/servo_lab/schedulability.py` — assumed-WCET fixed-priority response-time analysis; not an actual RTOS guarantee.
+- `cpp/src/host_cycle_benchmark.cpp` — native function compute-time microbenchmark; not real-time jitter or true WCET.
+- 64-case seeded software fault campaign, cross-language reference checks, expanded tests and updated engineering risk/porting specification.
+
+**Expanded checks:** 71 Python tests, 4 native C++ test executables, 12 reproducibility stages, plus a separate AddressSanitizer and UndefinedBehaviorSanitizer pass on the C++ core.
+
+Reproduce with the same single command:
+
+```bash
+PYTHONPATH=src python tools/quality_gate.py
+```
+
+Extended results: [`outputs/extended_prework/REPORT.md`](outputs/extended_prework/REPORT.md) and [`results.json`](outputs/extended_prework/results.json). The sole remaining work is **hardware/vendor-specific embedded, fieldbus and physical-validation integration**, not another simulated control-platform rewrite. See [`docs/NEXT_WORK_BOUNDARY.md`](docs/NEXT_WORK_BOUNDARY.md).
+
+## What is not complete
+
+1. Electrical motor identification from manufacturer data and measured torque/current/back-EMF/inductance.
+2. Real motor driver and PWM/FOC implementation; switching behaviour is absent from the averaged DC-equivalent plant.
+3. Actual microcontroller/RTOS target, ISR/ADC/encoder drivers and real-time jitter/deadline assessment.
+4. CANopen/CiA 402 or EtherCAT integration; current protocol is deliberately simulated only.
+5. Hardware homing, safety-related limit switches, independent emergency stop, safe torque off and risk assessment.
+6. Closed-loop comparison against physical motor-axis measurements and thermal/fatigue validation.
+7. PLC/HMI and commissioning of a real machine.
+
+See [`docs/CURRENT_STATE.md`](docs/CURRENT_STATE.md) and [`WORK_HANDOFF.md`](WORK_HANDOFF.md) for bounded next steps. The technical scope is suitable for showcasing **control-software architecture and test methodology**, not for claiming a physically commissioned servo axis.

@@ -1,0 +1,102 @@
+{
+  "validation_scope": "Python/C++ SIL, virtual fieldbus, synthetic identification and host timing only \u2014 no physical/RTOS/hardware validation",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "python_tests",
+      "status": "pass",
+      "returncode": 0,
+      "duration_s": 5.528,
+      "stdout_tail": ".......................................................................  [100%]\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "python_compile",
+      "status": "pass",
+      "returncode": 0,
+      "duration_s": 0.895,
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    {
+      "name": "generate_cpp_config",
+      "status": "pass",
+      "returncode": 0,
+      "duration_s": 1.069,
+      "stdout_tail": "<PROJECT_ROOT>/cpp/include/servo/generated_assumptions.hpp\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "cmake_configure",
+      "status": "pass",
+      "returncode": 0,
+      "duration_s": 0.06,
+      "stdout_tail": "-- Configuring done (0.0s)\n-- Generating done (0.0s)\n-- Build files have been written to: <PROJECT_ROOT>/build/cpp\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "cmake_build",
+      "status": "pass",
+      "returncode": 0,
+      "duration_s": 2.907,
+      "stdout_tail": "[ 36%] Built target servo_core\n[ 42%] Building CXX object CMakeFiles/servo_demo.dir/src/demo.cpp.o\n[ 47%] Building CXX object CMakeFiles/servo_core_test.dir/tests/test_core.cpp.o\n[ 52%] Building CXX object CMakeFiles/servo_embedded_contract_test.dir/tests/test_runtime.cpp.o\n[ 63%] Built target servo_virtual_bus_test\n[ 68%] Building CXX object CMakeFiles/servo_host_cycle_benchmark.dir/src/host_cycle_benchmark.cpp.o\n[ 73%] Linking CXX executable servo_embedded_contract_test\n[ 78%] Linking CXX executable servo_core_test\n[ 78%] Built target servo_embedded_contract_test\n[ 78%] Built target servo_core_test\n[ 84%] Building CXX object CMakeFiles/servo_hal_test.dir/tests/test_hal.cpp.o\n[ 89%] Linking CXX executable servo_hal_test\n[ 89%] Built target servo_hal_test\n[ 94%] Linking CXX executable servo_demo\n[ 94%] Built target servo_demo\n[100%] Linking CXX executable servo_host_cycle_benchmark\n[100%] Built target servo_host_cycle_benchmark\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "cpp_ctest",
+      "status": "pass",
+      "returncode": 0,
+      "duration_s": 0.033,
+      "stdout_tail": "Internal ctest changing into directory: <PROJECT_ROOT>/build/cpp\nTest project <PROJECT_ROOT>/build/cpp\n    Start 1: servo_core_test\n1/4 Test #1: servo_core_test ..................   Passed    0.00 sec\n    Start 2: servo_virtual_bus_test\n2/4 Test #2: servo_virtual_bus_test ...........   Passed    0.01 sec\n    Start 3: servo_embedded_contract_test\n3/4 Test #3: servo_embedded_contract_test .....   Passed    0.00 sec\n    Start 4: servo_hal_test\n4/4 Test #4: servo_hal_test ...................   Passed    0.00 sec\n\n100% tests passed, 0 tests failed out of 4\n\nTotal Test time (real) =   0.02 sec\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "cpp_sil_demo",
+      "status": "pass",
+      "returncode": 0,
+      "duration_s": 0.004,
+      "stdout_tail": "saved to <PROJECT_ROOT>/outputs/cpp_sil_trace.csv",
+      "stderr_tail": ""
+    },
+    {
+      "name": "python_evidence",
+      "status": "pass",
+      "returncode": 0,
+      "duration_s": 8.461,
+      "stdout_tail": "Built 100 deterministic variants, 8 fault/nominal scenarios\nFinal error=0.0011 mm, max tracking=0.312 mm\nOutput: <PROJECT_ROOT>/outputs\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "cross_language_parity",
+      "status": "pass",
+      "returncode": 0,
+      "duration_s": 1.235,
+      "stdout_tail": "{\n  \"cpp_samples\": 251,\n  \"python_samples\": 2501,\n  \"final_position_difference_mm\": 0.0005030550592477478,\n  \"maximum_abs_position_difference_mm\": 0.023740424955731587,\n  \"mean_abs_position_difference_mm\": 0.005714078692930749,\n  \"final_cpp_error_mm\": 0.0005644853000030814,\n  \"pass\": true,\n  \"interpretation\": \"C++ fixed-step control/plant checked against Python counterpart; numerical integrators differ; neither is physical validation.\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "offline_dashboard",
+      "status": "pass",
+      "returncode": 0,
+      "duration_s": 1.409,
+      "stdout_tail": "<PROJECT_ROOT>/outputs/servo_control_dashboard.html\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "host_loop_benchmark",
+      "status": "pass",
+      "returncode": 0,
+      "duration_s": 0.015,
+      "stdout_tail": "saved to <PROJECT_ROOT>/outputs/host_loop_benchmark.json",
+      "stderr_tail": ""
+    },
+    {
+      "name": "extended_hardware_neutral_evidence",
+      "status": "pass",
+      "returncode": 0,
+      "duration_s": 6.094,
+      "stdout_tail": "{\n  \"status\": \"PASS\",\n  \"fault_cases\": 64,\n  \"resistance_ohm\": 1.4992151816716155,\n  \"inductance_h\": 0.0030128251220098968,\n  \"holdout_rmse_a\": 0.021086536610521983,\n  \"target\": \"<PROJECT_ROOT>/outputs/extended_prework\"\n}\n",
+      "stderr_tail": ""
+    }
+  ]
+}

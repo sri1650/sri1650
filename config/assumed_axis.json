@@ -1,0 +1,60 @@
+{
+  "status": "ASSUMED EDUCATIONAL SYSTEM — DO NOT USE FOR REAL MOTOR COMMISSIONING",
+  "source": "Mechanical axis sizing values copied from Project 3 config/design.json; electrical, transmission, encoder and detailed dynamic parameters are new assumptions.",
+  "mechanics": {
+    "moving_mass_kg": 8.0,
+    "horizontal_acceleration_m_s2": 1.0,
+    "coulomb_friction_coefficient": 0.12,
+    "pulley_radius_m": 0.020,
+    "gear_ratio_motor_to_output": 3.0,
+    "transmission_efficiency": 0.85,
+    "travel_min_m": 0.0,
+    "travel_max_m": 0.30,
+    "gravity_m_s2": 9.81,
+    "external_disturbance_force_n": 0.0,
+    "friction_smoothing_velocity_m_s": 0.001
+  },
+  "motor": {
+    "dc_bus_v": 24.0,
+    "winding_resistance_ohm": 1.5,
+    "winding_inductance_h": 0.003,
+    "torque_constant_nm_per_a": 0.16,
+    "back_emf_constant_v_per_rad_s": 0.16,
+    "rotor_inertia_kg_m2": 0.00015,
+    "viscous_friction_nm_per_rad_s": 0.00018,
+    "continuous_torque_nm": 1.2,
+    "continuous_current_a": 7.5,
+    "peak_current_a": 8.0
+  },
+  "control": {
+    "tick_s": 0.001,
+    "position_loop_divisor": 10,
+    "velocity_loop_divisor": 4,
+    "position_kp_per_s": 14.0,
+    "velocity_kp_a_per_rad_s": 0.13,
+    "velocity_ki_a_per_rad": 5.0,
+    "current_kp_v_per_a": 1.5,
+    "current_ki_v_per_a_s": 150.0,
+    "current_limit_a": 7.5,
+    "max_speed_m_s": 0.35,
+    "max_acceleration_m_s2": 1.0,
+    "max_jerk_m_s3": 8.0,
+    "target_position_m": 0.10,
+    "target_settle_error_m": 0.005,
+    "target_settle_velocity_m_s": 0.01,
+    "hold_duration_s": 1.0
+  },
+  "encoder": {
+    "counts_per_motor_rev": 16384,
+    "feedback_noise_position_std_m": 0.0,
+    "feedback_noise_current_std_a": 0.0,
+    "seed": 17
+  },
+  "supervision": {
+    "command_timeout_s": 0.20,
+    "soft_limit_margin_m": 0.005,
+    "overtemperature_c": 85.0,
+    "min_bus_v": 18.0,
+    "sensor_stale_limit_s": 0.02
+  }
+}

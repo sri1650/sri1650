@@ -1,0 +1,1 @@
+{"scope":"native host loop compute time; NOT deterministic real-time jitter or WCET","samples":60000,"valid_commands":60000,"p50_us":0.051000,"p95_us":0.075000,"p99_us":0.087000,"max_us":263.982000,"missed_logical_deadlines":0,"observable_output_checksum":1452401.788235}

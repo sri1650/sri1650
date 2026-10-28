@@ -1,0 +1,97 @@
+{
+  "assumed_fixed_priority_schedulability": {
+    "all_schedulable": true,
+    "assumed_utilisation": 0.07050000000000001,
+    "assumptions": "fixed-priority preemptive periodic scheduling; WCETs are assumptions, not measured hardware bounds",
+    "tasks": [
+      {
+        "deadline_us": 1000,
+        "name": "current_control",
+        "response_time_us": 35,
+        "schedulable": true
+      },
+      {
+        "deadline_us": 4000,
+        "name": "velocity_control",
+        "response_time_us": 95,
+        "schedulable": true
+      },
+      {
+        "deadline_us": 10000,
+        "name": "communication_housekeeping",
+        "response_time_us": 215,
+        "schedulable": true
+      },
+      {
+        "deadline_us": 10000,
+        "name": "position_control",
+        "response_time_us": 300,
+        "schedulable": true
+      }
+    ]
+  },
+  "assumed_motor_electrical": {
+    "L_h": 0.003,
+    "R_ohm": 1.5
+  },
+  "example_plc_register_snapshot": [
+    1,
+    0,
+    1,
+    34464,
+    0,
+    0
+  ],
+  "fault_campaign": {
+    "faults": [
+      "encoder_invalid",
+      "sensor_stale",
+      "undervoltage",
+      "overtemperature",
+      "emergency_stop",
+      "heartbeat_loss"
+    ],
+    "hard_stop_contacts": 0,
+    "max_abs_post_fault_travel_m": 0.02755531886033681,
+    "scenarios": 64,
+    "scope": "SIL assumed plant and software command inhibit; not hardware emergency-stop distance",
+    "seed": 2026,
+    "software_voltage_inhibit_violations": 0
+  },
+  "native_host_loop_benchmark": {
+    "max_us": 1173.628,
+    "missed_logical_deadlines": 0,
+    "observable_output_checksum": 1452401.788235,
+    "p50_us": 0.051,
+    "p95_us": 0.078,
+    "p99_us": 0.088,
+    "samples": 60000,
+    "scope": "native host loop compute time; NOT deterministic real-time jitter or WCET",
+    "valid_commands": 60000
+  },
+  "synthetic_electrical_fit": {
+    "holdout_rmse_a": 0.021086536610521983,
+    "inductance_ci95_h": [
+      0.002998747846269871,
+      0.0030269023977499226
+    ],
+    "inductance_h": 0.0030128251220098968,
+    "resistance_ci95_ohm": [
+      1.4978701460823538,
+      1.5005602172608772
+    ],
+    "resistance_ohm": 1.4992151816716155,
+    "samples": 240,
+    "train_rmse_a": 0.026195968841017384,
+    "voltage_v": 8.0
+  },
+  "synthetic_mechanical_fit": {
+    "design_condition_number": 6.210002361778652,
+    "equivalent_inertia_kg_m2": 0.0005682135492415527,
+    "residual_rmse_nm": 0.0001570724963156585,
+    "samples": 1000,
+    "smoothed_coulomb_torque_nm": 0.012019597275110353,
+    "viscous_friction_nm_s_rad": 0.00017908152600875022
+  },
+  "validation_status": "software/synthetic only; no physical motor, no RTOS WCET evidence"
+}
