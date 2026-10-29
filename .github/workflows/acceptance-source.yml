@@ -1,0 +1,27 @@
+name: Servo acceptance review source archive (not a test gate)
+on:
+  push:
+    branches: [acceptance/servo-closeout-2026-10-29]
+    paths: [.github/workflows/acceptance-source.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Archive tracked source only
+        run: |
+          mkdir -p review
+          git rev-parse HEAD > review/source-commit.txt
+          git archive --format=zip --output=review/source-snapshot.zip HEAD
+          printf '%s\n' 'Source transfer only; not new virtual-bench or physical-motor verification.' > review/SCOPE.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: private-engineering-review-source
+          path: review/
+          retention-days: 7
+          if-no-files-found: error
