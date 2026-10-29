@@ -3,7 +3,7 @@
 #include <cmath>
 namespace servo {
 HostPortableAxis::HostPortableAxis(AxisConfig cfg,SupervisorConfig supervision,LoopPolicy timing,IOPort p) noexcept
-    :loop_(cfg,supervision,timing),port_(p),dc_bus_nominal_v_(cfg.bus_voltage_v) {}
+    :loop_(cfg,supervision,timing),port_(p) {}
 void HostPortableAxis::force_disabled() noexcept {
     loop_.stop();
     if(port_.write)port_.write(port_.context,{false,0.0});

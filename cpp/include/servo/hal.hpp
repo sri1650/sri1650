@@ -40,6 +40,5 @@ public:
 private:
     EmbeddedLoop loop_;
     IOPort port_;
-    double dc_bus_nominal_v_{};
 };
 }
